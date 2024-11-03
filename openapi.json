@@ -1,0 +1,152 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "open_api",
+        "version": "0.0.1",
+        "description": "A Swagger viewer for NextCloud",
+        "license": {
+            "name": "agpl"
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basic_auth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "bearer_auth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
+        "schemas": {
+            "AppInfo": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "version",
+                    "standard",
+                    "preview"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "string"
+                    },
+                    "standard": {
+                        "type": "boolean"
+                    },
+                    "preview": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "AppsListInfo": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/AppInfo"
+                }
+            },
+            "OpenApi": {
+                "type": "object"
+            }
+        }
+    },
+    "paths": {
+        "/index.php/apps/open_api/openapi": {
+            "get": {
+                "operationId": "open_api-index",
+                "summary": "List open apis available",
+                "tags": [
+                    "open_api"
+                ],
+                "security": [
+                    {},
+                    {
+                        "bearer_auth": []
+                    },
+                    {
+                        "basic_auth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application list returned successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppsListInfo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/index.php/apps/open_api/openapi/{appId}": {
+            "get": {
+                "operationId": "open_api-get",
+                "summary": "get OpenAPI definition for an app appId",
+                "tags": [
+                    "open_api"
+                ],
+                "security": [
+                    {},
+                    {
+                        "bearer_auth": []
+                    },
+                    {
+                        "basic_auth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "appId",
+                        "in": "path",
+                        "description": "Application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application OpenApi description returned successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenApi"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Application OpenApi is not available for current user",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Application OpenApi description not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": []
+}

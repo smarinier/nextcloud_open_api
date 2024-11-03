@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>open_api</id>
+    <name>Nextcloud Open API</name>
+    <summary>A Swagger viewer for NextCloud</summary>
+    <namespace>OpenApiUI</namespace>
+    <description>Display and try out with Swagger your Nextcloud active applications APIs with OpenApi definitions.</description>
+    <version>0.1.0</version>
+    <licence>agpl</licence>
+    <author mail="seb@smarinier.net" homepage="https://smarinier.net/">smarinier</author>
+    <category>tools</category>
+    <website>https://github.com/smarinier/nextcloud_open_api</website>
+    <bugs>https://github.com/smarinier/nextcloud_open_api/issues</bugs>
+	<screenshot small-thumbnail="https://raw.githubusercontent.com/smarinier/nextcloud_open_api/master/screenshots/open-api-swagger-tn.png">https://raw.githubusercontent.com/smarinier/nextcloud_open_api/master/screenshots/open-api-swagger.png</screenshot>
+    <dependencies>
+        <nextcloud min-version="28" max-version="30" />
+    </dependencies>
+
+    <navigations>
+        <navigation>
+            <name>Open API</name>
+            <route>open_api.page.index</route>
+            <icon>app.svg</icon>
+        </navigation>
+    </navigations>
+</info>
